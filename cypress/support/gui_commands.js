@@ -24,7 +24,7 @@ Cypress.Commands.add('login', (
     if (cacheSession) {
         cy.session(user, login, options)
     } else {
-    login()
+        login()
     }
     
 })
@@ -43,10 +43,9 @@ Cypress.Commands.add('gui_createProject', project => {
 
 })
 
-Cypress.Commands.add('gui_removeProject', project => {
-    cy.get('.qa-settings-item').click()
-    cy.get('#js-project-advanced-settings').find('.js-settings-toggle').click()
-    cy.contains('Remove project').click()
-    cy.get('#confirm_name_input').type(project.name)
-    cy.get('.qa-confirm-button').click()
+Cypress.Commands.add('gui_createIssue', issue => {
+    cy.visit(`/${Cypress.env('user_name')}/${issue.project.name}/issues/new`)
+    cy.get('#issue_title').type(issue.title)
+    cy.get('#issue_description').type(issue.description)
+    cy.get('.qa-issuable-create-button').click()
 })
