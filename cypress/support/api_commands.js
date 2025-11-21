@@ -26,3 +26,12 @@ Cypress.Commands.add('api_createIssue', issue => {
     }))
 })
 
+Cypress.Commands.add('api_getAllProjects' , () => {
+    cy.request({
+        method: 'GET',
+        url: `/api/v4/projects/`,
+        headers: { Authorization: accessToken }
+    })
+})
+
+
