@@ -34,4 +34,13 @@ Cypress.Commands.add('api_getAllProjects' , () => {
     })
 })
 
+Cypress.Commands.add('api_removeAllProjects', () => {
+    cy.api_getAllProjects().then(res => 
+        res.body.forEach(project => cy.request({
+            method: 'DELETE',
+            url: `/api/v4/projects/${project.id}`,
+            headers: { Authorization: accessToken }
+        }))
+    )
+})
 
